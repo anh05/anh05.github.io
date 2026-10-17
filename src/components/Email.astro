@@ -1,0 +1,25 @@
+---
+/* Author: DA Nguyen */
+// Email link with light obfuscation: the address is never written verbatim in
+// the HTML. A script assembles the mailto link; without JS a readable
+// "user [at] domain" fallback is shown.
+import { profile } from '../data/profile';
+
+const { user, domain } = profile.email;
+// Reversed parts, so a plain-text scan of the page does not find the address.
+const reversed = [...`${user}|${domain}`].reverse().join('');
+---
+
+<a class="email" data-mail={reversed} href="#contact">
+  <span>{user} [at] {domain.replace('.', ' [dot] ')}</span>
+</a>
+
+<script>
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('a[data-mail]')) {
+    const [user, domain] = [...(link.dataset.mail ?? '')].reverse().join('').split('|');
+    if (!user || !domain) continue;
+    const address = `${user}@${domain}`;
+    link.href = `mailto:${address}`;
+    link.textContent = address;
+  }
+</script>

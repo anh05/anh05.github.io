@@ -1,0 +1,19 @@
+---
+/* Author: DA Nguyen */
+// Email and profile links (GitHub, LinkedIn, Google Scholar, PyPI).
+import { profileLinks } from '../data/profile';
+import Email from './Email.astro';
+---
+
+<ul class="profile-links">
+  <li><Email /></li>
+  {
+    profileLinks.map((link) => (
+      <li>
+        <a href={link.url} rel="me noopener" target="_blank">
+          {link.label}
+        </a>
+      </li>
+    ))
+  }
+</ul>

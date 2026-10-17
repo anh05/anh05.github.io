@@ -1,0 +1,95 @@
+---
+/* Author: DA Nguyen */
+// One publication: citation line, DOI / code / package badges and BibTeX copy.
+import type { CollectionEntry } from 'astro:content';
+import { toBibtex } from '../lib/bibtex';
+import { displayAuthor, isSelf } from '../lib/format';
+
+interface Props {
+  pub: CollectionEntry<'publications'>;
+  /** Show the copy-BibTeX button. */
+  bibtex?: boolean;
+}
+
+const { pub, bibtex = true } = Astro.props;
+const d = pub.data;
+const typeLabel = { thesis: 'PhD thesis', journal: 'Journal', conference: 'Conference' }[d.type];
+const inReview = d.status === 'in-review';
+const details = [d.volume && `vol. ${d.volume}`, d.pages && `pp. ${d.pages}`].filter(Boolean).join(', ');
+---
+
+<article class="pub" id={pub.id}>
+  <p class="pub-title">{d.title}</p>
+  <p class="pub-authors">
+    {
+      d.authors.map((author, i) => (
+        <>
+          {isSelf(author) ? <strong>{displayAuthor(author)}</strong> : displayAuthor(author)}
+          {i < d.authors.length - 1 && ', '}
+        </>
+      ))
+    }
+  </p>
+  <p class="pub-venue">
+    {inReview ? 'Manuscript in review' : <em>{d.venue}</em>}
+    {details && `, ${details}`}
+    {`, ${d.year}.`}
+  </p>
+  <ul class="badges">
+    <li><span class="badge badge-type">{typeLabel}</span></li>
+    {inReview && <li><span class="badge badge-review">In review</span></li>}
+    {
+      d.doi && (
+        <li>
+          <a class="badge" href={`https://doi.org/${d.doi}`} target="_blank" rel="noopener">
+            DOI
+          </a>
+        </li>
+      )
+    }
+    {
+      d.code && (
+        <li>
+          <a class="badge" href={d.code} target="_blank" rel="noopener">
+            Code
+          </a>
+        </li>
+      )
+    }
+    {
+      d.package && (
+        <li>
+          <a class="badge" href={d.package} target="_blank" rel="noopener">
+            Package
+          </a>
+        </li>
+      )
+    }
+    {
+      bibtex && (
+        <li>
+          <button class="badge copy-bibtex" type="button" data-bibtex={toBibtex(pub)}>
+            Copy BibTeX
+          </button>
+        </li>
+      )
+    }
+  </ul>
+</article>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('button.copy-bibtex')) {
+    button.addEventListener('click', async () => {
+      const text = button.dataset.bibtex ?? '';
+      const label = button.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = 'Copied';
+      } catch {
+        // Clipboard API unavailable (e.g. insecure context): show the entry instead.
+        window.prompt('Copy the BibTeX entry:', text);
+      }
+      setTimeout(() => (button.textContent = label), 1500);
+    });
+  }
+</script>

@@ -1,0 +1,57 @@
+---
+/* Author: DA Nguyen */
+// Blog index (/blog/) and posts (/blog/<id>/). No pages are generated while
+// there are no published posts, so the blog stays hidden until the first one.
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  if (posts.length === 0) return [];
+  return [
+    { params: { slug: undefined }, props: { posts, post: undefined } },
+    ...posts.map((post) => ({ params: { slug: post.id }, props: { posts, post } })),
+  ];
+}
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  post?: CollectionEntry<'blog'>;
+}
+
+const { posts, post } = Astro.props;
+const rendered = post ? await render(post) : undefined;
+const Content = rendered?.Content;
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+{
+  post && Content ? (
+    <BaseLayout title={post.data.title} description={post.data.description} type="article">
+      <article>
+        <h1>{post.data.title}</h1>
+        <p class="muted">
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        </p>
+        <Content />
+      </article>
+    </BaseLayout>
+  ) : (
+    <BaseLayout title="Blog" description="Notes on ML systems, data infrastructure and backend development.">
+      <h1>Blog</h1>
+      {posts.map((p) => (
+        <article class="entry">
+          <h3>
+            <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+          </h3>
+          <p class="entry-meta">
+            <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+          </p>
+          <p>{p.data.description}</p>
+        </article>
+      ))}
+    </BaseLayout>
+  )
+}

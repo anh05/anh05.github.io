@@ -1,0 +1,319 @@
+/* Author: DA Nguyen */
+/* Baseline styles: readable typography and simple layout. Visual design comes later. */
+
+:root {
+  --bg: #ffffff;
+  --fg: #1f2328;
+  --muted: #59636e;
+  --border: #d1d9e0;
+  --accent: #0b5cad;
+  --badge-bg: #f1f4f7;
+  --review: #9a6700;
+  --max-width: 52rem;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1216;
+    --fg: #e6e9ed;
+    --muted: #9aa4af;
+    --border: #2f363d;
+    --accent: #6cb6ff;
+    --badge-bg: #1c2128;
+    --review: #d4a72c;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main.container {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--bg);
+  padding: 0.5rem;
+}
+
+/* Header and footer */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.site-name {
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.site-header ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header a[aria-current='page'] {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Home hero */
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  align-items: center;
+}
+
+.hero-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-text {
+  flex: 1 1 20rem;
+}
+
+.headline {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.focus,
+.muted {
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+/* Link lists, tags and badges */
+
+.profile-links,
+.badges,
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+.profile-links {
+  gap: 0.5rem 1.25rem;
+}
+
+.email {
+  overflow-wrap: anywhere;
+}
+
+.tags li {
+  font-size: 0.8rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0 0.6rem;
+}
+
+.badge {
+  display: inline-block;
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  padding: 0.05rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--badge-bg);
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+span.badge {
+  cursor: default;
+  color: var(--muted);
+}
+
+.badge-review {
+  color: var(--review) !important;
+  border-color: currentColor;
+}
+
+/* Publications */
+
+.pub {
+  margin: 0 0 1.5rem;
+}
+
+.pub p {
+  margin: 0;
+}
+
+.pub-title {
+  font-weight: 600;
+}
+
+.pub-authors,
+.pub-venue {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.pub-authors strong {
+  color: var(--fg);
+}
+
+.year-group h2 {
+  font-size: 1.2rem;
+}
+
+/* Cards and timeline entries */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.card p {
+  margin: 0.25rem 0 0;
+}
+
+.entry {
+  margin: 0 0 1.5rem;
+}
+
+.entry-meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.entry ul:not(.tags) {
+  margin: 0.4rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: minmax(8rem, max-content) 1fr;
+  gap: 0.4rem 1.25rem;
+  margin: 0;
+}
+
+.skills dt {
+  font-weight: 600;
+}
+
+.skills dd {
+  margin: 0;
+}
+
+@media (max-width: 36rem) {
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
+  .skills dd {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.more {
+  margin-top: 1rem;
+}

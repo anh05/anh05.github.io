@@ -1,0 +1,152 @@
+---
+/* Author: DA Nguyen */
+// Web version of the CV. References are never listed: "available on request".
+import { getCollection } from 'astro:content';
+import ProfileLinks from '../components/ProfileLinks.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import { fullHeadline, profile } from '../data/profile';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { byRecency, formatRange } from '../lib/format';
+import { hasCvPdf } from '../lib/site';
+
+const experience = (await getCollection('experience')).sort(byRecency);
+const education = (await getCollection('education')).sort(byRecency);
+const teaching = (await getCollection('teaching')).sort(byRecency);
+const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="CV" description={`Curriculum vitae of ${profile.name}, ${fullHeadline}.`} type="profile">
+  <header>
+    <h1>{profile.title} {profile.name}</h1>
+    <p class="headline">{profile.headline}</p>
+    <p class="focus">{profile.focus}</p>
+    <p class="muted">{profile.location} · Citizenship: {profile.citizenship}</p>
+    <ProfileLinks />
+    {
+      hasCvPdf && (
+        <p class="more">
+          <a href="/cv.pdf" download>
+            Download PDF
+          </a>
+        </p>
+      )
+    }
+  </header>
+
+  <section aria-labelledby="profile">
+    <h2 id="profile">Profile</h2>
+    {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">Technical skills</h2>
+    <dl class="skills">
+      {
+        profile.skills.map((skill) => (
+          <>
+            <dt>{skill.area}</dt>
+            <dd>{skill.items}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+    {
+      experience.map(({ data }) => (
+        <article class="entry">
+          <h3>
+            {data.role}, {data.organization}
+          </h3>
+          <p class="entry-meta">
+            {formatRange(data.start, data.end)} · {data.location}
+            {data.note && ` · ${data.note}`}
+          </p>
+          {data.highlights.length > 0 && (
+            <ul>
+              {data.highlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {data.tags.length > 0 && (
+            <ul class="tags">
+              {data.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="education">
+    <h2 id="education">Education</h2>
+    {
+      education.map(({ data }) => (
+        <article class="entry">
+          <h3>{data.degree}</h3>
+          <p class="entry-meta">
+            {data.institution} · {data.location} · {formatRange(data.start, data.end)}
+          </p>
+          {(data.thesis || data.details.length > 0) && (
+            <ul>
+              {data.thesis && (
+                <li>
+                  Thesis: <em>{data.thesis}</em>
+                </li>
+              )}
+              {data.details.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="teaching">
+    <h2 id="teaching">Teaching</h2>
+    {
+      teaching.map(({ data }) => (
+        <article class="entry">
+          <h3>
+            {data.role}
+            {data.course && `, ${data.course}`}
+          </h3>
+          <p class="entry-meta">
+            {data.institution} · {data.location} · {formatRange(data.start, data.end)}
+          </p>
+          {data.details.length > 0 && (
+            <ul>
+              {data.details.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="publications">
+    <h2 id="publications">Publications</h2>
+    {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
+    <p class="more"><a href="/publications/">Publications with BibTeX →</a></p>
+  </section>
+
+  <section aria-labelledby="languages">
+    <h2 id="languages">Languages & strengths</h2>
+    <p>{profile.languages.map((lang) => `${lang.name} (${lang.level})`).join(' · ')}</p>
+    <p>{profile.strengths.join(' · ')}</p>
+  </section>
+
+  <section aria-labelledby="references">
+    <h2 id="references">References</h2>
+    <p>References available on request.</p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+/* Author: DA Nguyen */
+// Home: identity, short summary, links, selected projects and publications.
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import photo from '../assets/photo.png';
+import ProfileLinks from '../components/ProfileLinks.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import { profile } from '../data/profile';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects', ({ data }) => data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const publications = (await getCollection('publications', ({ data }) => data.selected)).sort(
+  (a, b) => b.data.year - a.data.year,
+);
+---
+
+<BaseLayout type="profile">
+  <section class="hero">
+    <Image
+      class="hero-photo"
+      src={photo}
+      alt={`Portrait of ${profile.name}`}
+      width={160}
+      height={160}
+      densities={[1, 2]}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-text">
+      <h1>{profile.name}</h1>
+      <p class="headline">{profile.headline}</p>
+      <p class="focus">{profile.focus}</p>
+      <ProfileLinks />
+    </div>
+  </section>
+
+  <section aria-labelledby="about">
+    <h2 id="about">About</h2>
+    {profile.about.slice(0, 2).map((paragraph) => <p>{paragraph}</p>)}
+    <p class="more"><a href="/cv/">Read the full CV →</a></p>
+  </section>
+
+  <section aria-labelledby="projects">
+    <h2 id="projects">Selected projects</h2>
+    <div class="cards">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <p class="more"><a href="/projects/">All projects →</a></p>
+  </section>
+
+  <section aria-labelledby="publications">
+    <h2 id="publications">Selected publications</h2>
+    {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
+    <p class="more"><a href="/publications/">All publications →</a></p>
+  </section>
+</BaseLayout>

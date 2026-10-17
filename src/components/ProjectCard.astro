@@ -1,0 +1,24 @@
+---
+/* Author: DA Nguyen */
+// One open-source project with repository, package and paper links.
+import { getEntry, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const d = project.data;
+const paper = d.publication ? await getEntry(d.publication) : undefined;
+---
+
+<article class="card">
+  <h3>{d.name}</h3>
+  <p>{d.description}</p>
+  {d.tags.length > 0 && <ul class="tags">{d.tags.map((tag) => <li>{tag}</li>)}</ul>}
+  <ul class="badges">
+    <li><a class="badge" href={d.repo} target="_blank" rel="noopener">GitHub</a></li>
+    {d.package && <li><a class="badge" href={d.package} target="_blank" rel="noopener">PyPI</a></li>}
+    {paper && <li><a class="badge" href={`/publications/#${paper.id}`}>Paper</a></li>}
+  </ul>
+</article>

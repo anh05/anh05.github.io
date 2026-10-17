@@ -13,12 +13,23 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   title="Projects"
   description={`Open-source Python packages and research code by ${profile.name}: AutoML, Bayesian optimization and imbalanced classification.`}
 >
-  <h1>Projects</h1>
-  <p class="muted">
-    Open-source packages on <a href={profile.links.pypi.url} target="_blank" rel="noopener">PyPI</a> and
-    code on <a href={profile.links.github.url} target="_blank" rel="noopener">GitHub</a>.
-  </p>
-  <div class="cards">
-    {projects.map((project) => <ProjectCard project={project} />)}
+  <div class="container page">
+    <header class="page-header">
+      <h1>Projects</h1>
+      <p class="lead muted" style="max-width: var(--measure)">
+        Open-source Python packages on <a href={profile.links.pypi.url} target="_blank" rel="noopener">PyPI</a> and
+        research code on <a href={profile.links.github.url} target="_blank" rel="noopener">GitHub</a>, each linked
+        to the paper it implements.
+      </p>
+    </header>
+    <ul class="card-grid">
+      {
+        projects.map((project) => (
+          <li>
+            <ProjectCard project={project} level={2} />
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </BaseLayout>

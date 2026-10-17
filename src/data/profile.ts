@@ -19,6 +19,33 @@ export const profile = {
   focus: 'ML systems, data infrastructure & backend development',
   summary:
     'Software engineer and PhD data scientist who builds data-intensive systems end-to-end, from database and system architecture to APIs, pipelines and published open-source tools.',
+  /** One-line value statement for the home page hero. */
+  valueStatement:
+    'I build data-intensive systems end-to-end — from database architecture and BI platforms to ML pipelines and open-source Python tools.',
+  /** The "What I build" strip on the home page, in career order. */
+  whatIBuild: [
+    {
+      period: '2009–2018',
+      title: 'ERP/BI data platforms',
+      text: 'Eight years designing databases, ERP and web-based BI reporting platforms that integrate data across departments.',
+      href: '/cv/#experience',
+      linkLabel: 'Experience',
+    },
+    {
+      period: '2018–2024',
+      title: 'AutoML research',
+      text: 'PhD at Leiden University on efficient tuning of ML pipelines, applied with Honda, NEC and Tata Steel.',
+      href: '/publications/',
+      linkLabel: 'Publications',
+    },
+    {
+      period: 'Ongoing',
+      title: 'Open-source Python packages',
+      text: 'DACOpt and BO4ML on PyPI — documented, reusable and backed by reproducible experiments.',
+      href: '/projects/',
+      linkLabel: 'Projects',
+    },
+  ],
   about: [
     'Software engineer and PhD data scientist who builds data-intensive systems end-to-end, from database and system architecture to APIs, pipelines and published open-source tools.',
     'Over eight years designing and deploying web-based data and reporting platforms (ERP/BI) that integrate heterogeneous data sources across departments, followed by a PhD at Leiden University combining rigorous ML/AutoML research with hands-on Python engineering.',

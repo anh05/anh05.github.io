@@ -1,17 +1,25 @@
 ---
 /* Author: DA Nguyen */
 // Email and profile links (GitHub, LinkedIn, Google Scholar, PyPI).
+// `handles` also shows each profile's handle, e.g. for the printed CV.
 import { profileLinks } from '../data/profile';
 import Email from './Email.astro';
+
+interface Props {
+  handles?: boolean;
+}
+
+const { handles = false } = Astro.props;
 ---
 
-<ul class="profile-links">
+<ul class="link-row">
   <li><Email /></li>
   {
     profileLinks.map((link) => (
       <li>
         <a href={link.url} rel="me noopener" target="_blank">
           {link.label}
+          {handles && <span class="handle">{link.handle}</span>}
         </a>
       </li>
     ))

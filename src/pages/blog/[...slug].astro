@@ -30,28 +30,32 @@ const formatDate = (date: Date) =>
 {
   post && Content ? (
     <BaseLayout title={post.data.title} description={post.data.description} type="article">
-      <article>
+      <article class="container narrow page">
         <h1>{post.data.title}</h1>
-        <p class="muted">
+        <p class="meta">
           <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
         </p>
-        <Content />
+        <div class="prose">
+          <Content />
+        </div>
       </article>
     </BaseLayout>
   ) : (
     <BaseLayout title="Blog" description="Notes on ML systems, data infrastructure and backend development.">
-      <h1>Blog</h1>
+      <div class="container narrow page">
+      <h1 class="page-header">Blog</h1>
       {posts.map((p) => (
-        <article class="entry">
-          <h3>
+        <article class="pub">
+          <h2 class="pub-title">
             <a href={`/blog/${p.id}/`}>{p.data.title}</a>
-          </h3>
-          <p class="entry-meta">
+          </h2>
+          <p class="meta">
             <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
           </p>
           <p>{p.data.description}</p>
         </article>
       ))}
+      </div>
     </BaseLayout>
   )
 }

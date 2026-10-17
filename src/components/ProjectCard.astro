@@ -5,18 +5,21 @@ import { getEntry, type CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  /** Heading level for the project name (h2 on /projects, h3 under a section). */
+  level?: 2 | 3;
 }
 
-const { project } = Astro.props;
+const { project, level = 3 } = Astro.props;
+const Heading = `h${level}` as const;
 const d = project.data;
 const paper = d.publication ? await getEntry(d.publication) : undefined;
 ---
 
 <article class="card">
-  <h3>{d.name}</h3>
+  <Heading class="card-title">{d.name}</Heading>
   <p>{d.description}</p>
-  {d.tags.length > 0 && <ul class="tags">{d.tags.map((tag) => <li>{tag}</li>)}</ul>}
-  <ul class="badges">
+  {d.tags.length > 0 && <ul class="tags" aria-label="Topics">{d.tags.map((tag) => <li>{tag}</li>)}</ul>}
+  <ul class="badges" aria-label={`${d.name} links`}>
     <li><a class="badge" href={d.repo} target="_blank" rel="noopener">GitHub</a></li>
     {d.package && <li><a class="badge" href={d.package} target="_blank" rel="noopener">PyPI</a></li>}
     {paper && <li><a class="badge" href={`/publications/#${paper.id}`}>Paper</a></li>}

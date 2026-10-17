@@ -1,6 +1,7 @@
 ---
 /* Author: DA Nguyen */
-// Home: identity, short summary, links, selected projects and publications.
+// Home: first screen (identity, value statement, photo, links), the
+// "What I build" strip, selected projects and selected publications.
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import photo from '../assets/photo.png';
@@ -19,42 +20,234 @@ const publications = (await getCollection('publications', ({ data }) => data.sel
 ---
 
 <BaseLayout type="profile">
-  <section class="hero">
-    <Image
-      class="hero-photo"
-      src={photo}
-      alt={`Portrait of ${profile.name}`}
-      width={160}
-      height={160}
-      densities={[1, 2]}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="hero-text">
-      <h1>{profile.name}</h1>
-      <p class="headline">{profile.headline}</p>
-      <p class="focus">{profile.focus}</p>
-      <ProfileLinks />
-    </div>
-  </section>
+  <div class="container page home">
+    <section class="hero" aria-labelledby="hero-name">
+      <div class="hero-text">
+        <p class="eyebrow">{profile.location}</p>
+        <h1 id="hero-name">{profile.name}</h1>
+        <p class="hero-headline">
+          {profile.headline}
+          <span>{profile.focus}</span>
+        </p>
+        <p class="hero-value">{profile.valueStatement}</p>
+        <div class="hero-actions">
+          <a class="button" href="/cv/">View CV</a>
+          <a class="button button-ghost" href="/projects/">Projects</a>
+        </div>
+        <ProfileLinks />
+      </div>
+      <Image
+        class="hero-photo"
+        src={photo}
+        alt={`Portrait of ${profile.name}`}
+        width={240}
+        height={240}
+        densities={[1, 2]}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </section>
 
-  <section aria-labelledby="about">
-    <h2 id="about">About</h2>
-    {profile.about.slice(0, 2).map((paragraph) => <p>{paragraph}</p>)}
-    <p class="more"><a href="/cv/">Read the full CV →</a></p>
-  </section>
+    <section class="section" aria-labelledby="build-title">
+      <div class="section-head">
+        <h2 id="build-title">What I build</h2>
+      </div>
+      <ol class="build-strip">
+        {
+          profile.whatIBuild.map((step, i) => (
+            <li class="build-step">
+              <p class="meta">
+                {String(i + 1).padStart(2, '0')} · {step.period}
+              </p>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+              <a class="more-link" href={step.href}>
+                {step.linkLabel} <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
-  <section aria-labelledby="projects">
-    <h2 id="projects">Selected projects</h2>
-    <div class="cards">
-      {projects.map((project) => <ProjectCard project={project} />)}
-    </div>
-    <p class="more"><a href="/projects/">All projects →</a></p>
-  </section>
+    <section class="section" aria-labelledby="projects-title">
+      <div class="section-head">
+        <h2 id="projects-title">Selected projects</h2>
+        <a class="more-link" href="/projects/">All projects <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="card-grid">
+        {
+          projects.map((project) => (
+            <li>
+              <ProjectCard project={project} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-  <section aria-labelledby="publications">
-    <h2 id="publications">Selected publications</h2>
-    {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
-    <p class="more"><a href="/publications/">All publications →</a></p>
-  </section>
+    <section class="section" aria-labelledby="pubs-title">
+      <div class="section-head">
+        <h2 id="pubs-title">Selected publications</h2>
+        <a class="more-link" href="/publications/">All publications <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="pub-list">
+        {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
+      </div>
+    </section>
+  </div>
 </BaseLayout>
+
+<style>
+  .hero {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+    padding-block: var(--space-6) 0;
+  }
+
+  @media (min-width: 48rem) {
+    .hero {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-8);
+      min-height: min(34rem, 62vh);
+      padding-block: 0;
+    }
+  }
+
+  .hero-text {
+    max-width: 40rem;
+  }
+
+  .hero h1 {
+    margin-top: var(--space-3);
+    font-size: var(--text-display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .hero-headline {
+    margin-top: var(--space-4);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-text-strong);
+  }
+
+  .hero-headline span {
+    display: block;
+    font-size: var(--text-base);
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .hero-value {
+    margin-top: var(--space-5);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-accent);
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    line-height: 1.4;
+    color: var(--color-text);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block: var(--space-6) var(--space-5);
+  }
+
+  .hero-photo {
+    order: -1;
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 48rem) {
+    .hero-photo {
+      order: 0;
+      width: 15rem;
+      height: 15rem;
+    }
+  }
+
+  .build-strip {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  @media (min-width: 52rem) {
+    .build-strip {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-7);
+    }
+  }
+
+  .build-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-left: var(--space-5);
+    border-left: 1px solid var(--color-border-strong);
+  }
+
+  .build-step::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.35rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent);
+  }
+
+  @media (min-width: 52rem) {
+    .build-step {
+      padding: var(--space-5) 0 0;
+      border-left: 0;
+      border-top: 1px solid var(--color-border-strong);
+    }
+
+    .build-step::before {
+      left: 0;
+      top: -5px;
+    }
+
+    .build-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      top: -0.85rem;
+      right: calc(-1 * var(--space-7) / 2 - 0.5rem);
+      width: 1rem;
+      text-align: center;
+      background: var(--color-bg);
+      color: var(--color-accent);
+      font-size: var(--text-base);
+    }
+  }
+
+  .build-step h3 {
+    font-size: var(--text-lg);
+  }
+
+  .build-step p:not(.meta) {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .build-step .more-link {
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+</style>

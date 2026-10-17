@@ -10,6 +10,10 @@ export interface ProfileLink {
   url: string;
 }
 
+/** Short professional summary (Home, CV profile, meta description). */
+const summary =
+  'Software engineer building open research data infrastructure, currently at the Westerdijk Fungal Biodiversity Institute (KNAW). I bring 8+ years of designing and running ERP/BI data systems, from database architecture to web-based reporting platforms, and a PhD in AutoML from Leiden University with published open-source Python packages.';
+
 export const profile = {
   name: 'Duc Anh Nguyen',
   /** Short form used for authorship metadata. */
@@ -17,11 +21,16 @@ export const profile = {
   title: 'Dr.',
   headline: 'Software Engineer | Data Scientist',
   focus: 'ML systems, data infrastructure & backend development',
-  summary:
-    'Software engineer and PhD data scientist who builds data-intensive systems end-to-end, from database and system architecture to APIs, pipelines and published open-source tools.',
+  /** Current position, shown in the Home hero and used for JSON-LD. */
+  currentRole: {
+    title: 'Software Engineer',
+    organization: 'Westerdijk Fungal Biodiversity Institute (KNAW)',
+    location: 'Utrecht, The Netherlands',
+  },
+  summary,
   /** One-line value statement for the home page hero. */
   valueStatement:
-    'I build data-intensive systems end-to-end — from database architecture and BI platforms to ML pipelines and open-source Python tools.',
+    'I build data-intensive systems end-to-end — from database architecture and BI platforms to ML pipelines and open research data infrastructure.',
   /** The "What I build" strip on the home page, in career order. */
   whatIBuild: [
     {
@@ -39,17 +48,16 @@ export const profile = {
       linkLabel: 'Publications',
     },
     {
-      period: 'Ongoing',
-      title: 'Open-source Python packages',
-      text: 'DACOpt and BO4ML on PyPI — documented, reusable and backed by reproducible experiments.',
+      period: '2024–present',
+      title: 'Open research software',
+      text: 'Open-source Python packages (DACOpt, BO4ML), the xAutoML platform, and open science data infrastructure.',
       href: '/projects/',
       linkLabel: 'Projects',
     },
   ],
   about: [
-    'Software engineer and PhD data scientist who builds data-intensive systems end-to-end, from database and system architecture to APIs, pipelines and published open-source tools.',
-    'Over eight years designing and deploying web-based data and reporting platforms (ERP/BI) that integrate heterogeneous data sources across departments, followed by a PhD at Leiden University combining rigorous ML/AutoML research with hands-on Python engineering.',
-    'Author of documented, reusable open-source Python packages on PyPI. Experienced in international, multidisciplinary teams (Honda, NEC, Tata Steel). Keen interest in Open Science, FAIR data principles, research data infrastructure, and applying ML/LLMs to make scientific data more discoverable and reusable.',
+    summary,
+    'Experienced in international, multidisciplinary teams (Honda, NEC, Tata Steel). Keen interest in Open Science, FAIR data principles, research data infrastructure, and applying ML/LLMs to make scientific data more discoverable and reusable.',
   ],
   location: 'Leiden, The Netherlands',
   citizenship: 'Dutch (EU) & Vietnamese',

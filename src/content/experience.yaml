@@ -4,20 +4,31 @@
 
 - id: westerdijk-knaw
   role: Software Engineer
-  organization: Westerdijk Institute (KNAW)
-  location: The Netherlands
-  start: "2026"
-  tags: [System/database design, Software engineering, Machine learning, Data science]
-
-- id: academic-industry-engagement
-  role: Academic & Industry Engagement
-  organization: HCMC University of Foreign Languages – Information Technology; University of Greenwich (Vietnam campus)
-  location: Vietnam
-  start: "2023"
+  organization: Westerdijk Fungal Biodiversity Institute (KNAW)
+  location: Utrecht, The Netherlands
+  start: "2026-10"
+  subtitle: Molecular Medical Mycology · MycoBase, NWO-funded open science infrastructure project
   highlights:
-    - On-call teaching support (HCMC University of Foreign Languages – Information Technology, 2025–present; University of Greenwich Vietnam campus, 2023–2024).
-    - Invited talks on AI applications in industry; maintained academic and professional collaboration networks.
-  tags: [Teaching, AI applications]
+    - Building MycoBase, an open online resource that brings fungal data together (taxonomy, DNA barcodes, traits, literature) from the institute's collection and international databases (GenBank, MycoBank, UNITE, GBIF) into one searchable, FAIR platform.
+    - Designing the central database, API and platform architecture.
+    - "Built and launched the project website (https://mycobase.org): Astro static site, Decap CMS so scientists can publish without Git, GitHub OAuth for editors, CI/CD with GitHub Actions to a SURF Research Cloud VM (nginx, HTTPS)."
+    - Prepared the SURF e-infrastructure request for compute and hosting (sequence-analysis workflows and the online platform).
+  tags: [Python, Databases, Astro, GitHub Actions, SURF Research Cloud, nginx, FAIR data]
+
+- id: xautoml
+  role: Independent software development
+  organization: xAutoML
+  link: /projects/xautoml/
+  location: Leiden, The Netherlands
+  start: "2024"
+  end: "2026-09"
+  highlights:
+    - Self-initiated platform that guides non-experts from a raw dataset to a tuned, explainable ML model.
+    - "Full stack: Flask web app, MySQL/SQLAlchemy data model, AutoML back end built on my DACOpt/BO4ML packages."
+    - Docker Compose; CI/CD with GitHub Actions → GHCR → self-hosted runner; exposed securely via Cloudflare Tunnel.
+    - Migrated data from an earlier version; health checks, versioned builds, system-status page.
+    - "Status: in active development, not yet open for public registration."
+  tags: [Python, Flask, MySQL, SQLAlchemy, Docker, GitHub Actions, Cloudflare Tunnel]
 
 - id: phd-liacs
   role: PhD Researcher — Data Science & ML Engineering

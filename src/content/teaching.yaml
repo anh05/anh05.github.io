@@ -1,21 +1,6 @@
 # Author: DA Nguyen
 # Teaching, sorted most recent first (by `end`, then `start`). Omit `end` for an ongoing role.
 
-- id: huflit
-  role: On-call teaching support
-  institution: HCMC University of Foreign Languages – Information Technology
-  location: Ho Chi Minh City, Vietnam
-  start: "2025"
-
-- id: greenwich-vn
-  role: Guest Lecturer
-  institution: FPT Greenwich University (Vietnam campus)
-  location: Ho Chi Minh City, Vietnam
-  start: "2023-09"
-  end: "2024-08"
-  details:
-    - Machine learning, data science, optimization and AutoML.
-
 - id: leiden-intro-ml
   role: Teaching Assistant
   course: Introduction to Machine Learning (graduate)

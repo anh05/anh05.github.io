@@ -22,13 +22,21 @@ const person = {
   name: profile.name,
   alternateName: profile.shortName,
   honorificPrefix: profile.title,
-  jobTitle: profile.headline,
+  jobTitle: profile.currentRole.title,
+  worksFor: { '@type': 'Organization', name: profile.currentRole.organization },
   description: fullHeadline,
   url: Astro.site?.href,
   image: ogImageUrl.href,
   address: { '@type': 'PostalAddress', addressLocality: 'Leiden', addressCountry: 'NL' },
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Leiden University' },
-  knowsAbout: ['Machine learning', 'AutoML', 'Hyperparameter optimization', 'Data infrastructure', 'Backend development'],
+  knowsAbout: [
+    'Research data infrastructure',
+    'FAIR data',
+    'Machine learning',
+    'AutoML',
+    'Hyperparameter optimization',
+    'Backend development',
+  ],
   sameAs: profileLinks.map((link) => link.url),
 };
 ---

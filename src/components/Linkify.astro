@@ -1,0 +1,23 @@
+---
+/* Author: DA Nguyen */
+// Renders plain text from the content files, turning bare https:// URLs into
+// links (shown without the protocol).
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const parts = text.split(/(https?:\/\/[^\s),]+)/);
+---
+
+{
+  parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <a href={part} target="_blank" rel="noopener">
+        {part.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+      </a>
+    ) : (
+      part
+    ),
+  )
+}

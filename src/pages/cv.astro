@@ -3,8 +3,10 @@
 // Web version of the CV, also styled for A4 print (see @media print in
 // global.css). References are never listed: "available on request".
 import { getCollection } from 'astro:content';
+import Linkify from '../components/Linkify.astro';
 import ProfileLinks from '../components/ProfileLinks.astro';
 import PublicationItem from '../components/PublicationItem.astro';
+import TalkList from '../components/TalkList.astro';
 import { fullHeadline, profile } from '../data/profile';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { byRecency, formatRange } from '../lib/format';
@@ -14,6 +16,7 @@ const experience = (await getCollection('experience')).sort(byRecency);
 const education = (await getCollection('education')).sort(byRecency);
 const teaching = (await getCollection('teaching')).sort(byRecency);
 const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+const talks = (await getCollection('talks')).sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout title="CV" description={`Curriculum vitae of ${profile.name}, ${fullHeadline}.`} type="profile">
@@ -54,13 +57,16 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
             <div class="entry-body">
               <h3>{data.role}</h3>
               <p class="entry-org">
-                {data.organization} · {data.location}
+                {data.link ? <a href={data.link}>{data.organization}</a> : data.organization} · {data.location}
                 {data.note && ` · ${data.note}`}
               </p>
+              {data.subtitle && <p class="entry-subtitle">{data.subtitle}</p>}
               {data.highlights.length > 0 && (
                 <ul>
                   {data.highlights.map((item) => (
-                    <li>{item}</li>
+                    <li>
+                      <Linkify text={item} />
+                    </li>
                   ))}
                 </ul>
               )}
@@ -146,6 +152,15 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
         ))
       }
     </section>
+
+    {
+      talks.length > 0 && (
+        <section class="cv-section" aria-labelledby="talks">
+          <h2 id="talks">Talks</h2>
+          <TalkList talks={talks} />
+        </section>
+      )
+    }
 
     <section class="cv-section" aria-labelledby="publications">
       <h2 id="publications">Publications</h2>

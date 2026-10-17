@@ -1,0 +1,10 @@
+# Author: DA Nguyen
+# Talks, newest first by `year`. The Talks sections on /cv and Home are hidden
+# while this list is empty. Example entry:
+#
+# - id: unique-id
+#   title: Talk title
+#   organization: a construction company
+#   location: Vietnam
+#   year: 2025
+[]

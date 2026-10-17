@@ -1,0 +1,25 @@
+---
+/* Author: DA Nguyen */
+// List of talks: year, title, host organisation and location.
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  talks: CollectionEntry<'talks'>[];
+}
+
+const { talks } = Astro.props;
+---
+
+{
+  talks.map(({ data }) => (
+    <article class="entry">
+      <p class="entry-when">{data.year}</p>
+      <div class="entry-body">
+        <h3>{data.url ? <a href={data.url} target="_blank" rel="noopener">{data.title}</a> : data.title}</h3>
+        <p class="entry-org">
+          {data.organization} · {data.location}
+        </p>
+      </div>
+    </article>
+  ))
+}

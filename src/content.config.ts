@@ -18,8 +18,12 @@ const experience = defineCollection({
     start: yearMonth,
     /** Omit for a current position. */
     end: yearMonth.optional(),
-    /** Optional note shown after the dates, e.g. "part-time". */
+    /** Optional line under the organisation, e.g. department and project. */
+    subtitle: z.string().optional(),
+    /** Optional note shown after the location, e.g. "part-time". */
     note: z.string().optional(),
+    /** Optional link for the organisation name (site path or URL). */
+    link: z.string().optional(),
     highlights: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
   }),
@@ -65,8 +69,16 @@ const projects = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string(),
+    /** My role, e.g. "Sole developer". */
+    role: z.string().optional(),
+    /** Short status, e.g. "In active development". */
+    status: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    repo: z.url(),
+    /** Public website of the project. */
+    url: z.url().optional(),
+    /** Internal case-study page, e.g. /projects/xautoml/. */
+    caseStudy: z.string().startsWith('/').optional(),
+    repo: z.url().optional(),
     package: z.url().optional(),
     publication: reference('publications').optional(),
     /** Show on the home page. */
@@ -89,6 +101,18 @@ const teaching = defineCollection({
   }),
 });
 
+const talks = defineCollection({
+  loader: file('src/content/talks.yaml'),
+  schema: z.object({
+    title: z.string(),
+    /** Host organisation, or a generic description such as "a construction company". */
+    organization: z.string(),
+    location: z.string(),
+    year: z.number().int(),
+    url: z.url().optional(),
+  }),
+});
+
 const blog = defineCollection({
   // Files starting with "_" (such as _template.md) are ignored.
   loader: glob({ base: './src/content/blog', pattern: '**/[^_]*.{md,mdx}' }),
@@ -102,4 +126,4 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { experience, education, publications, projects, teaching, blog };
+export const collections = { experience, education, publications, projects, teaching, talks, blog };

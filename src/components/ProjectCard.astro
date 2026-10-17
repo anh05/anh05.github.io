@@ -1,6 +1,7 @@
 ---
 /* Author: DA Nguyen */
-// One open-source project with repository, package and paper links.
+// One project: role/status line and links (case study, website, repository,
+// package, paper).
 import { getEntry, type CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -13,14 +14,20 @@ const { project, level = 3 } = Astro.props;
 const Heading = `h${level}` as const;
 const d = project.data;
 const paper = d.publication ? await getEntry(d.publication) : undefined;
+const meta = [d.role, d.status].filter(Boolean).join(' · ');
 ---
 
 <article class="card">
-  <Heading class="card-title">{d.name}</Heading>
+  <Heading class="card-title">
+    {d.caseStudy ? <a class="card-title-link" href={d.caseStudy}>{d.name}</a> : d.name}
+  </Heading>
+  {meta && <p class="meta card-meta">{meta}</p>}
   <p>{d.description}</p>
   {d.tags.length > 0 && <ul class="tags" aria-label="Topics">{d.tags.map((tag) => <li>{tag}</li>)}</ul>}
   <ul class="badges" aria-label={`${d.name} links`}>
-    <li><a class="badge" href={d.repo} target="_blank" rel="noopener">GitHub</a></li>
+    {d.caseStudy && <li><a class="badge" href={d.caseStudy}>Case study</a></li>}
+    {d.url && <li><a class="badge" href={d.url} target="_blank" rel="noopener">Website</a></li>}
+    {d.repo && <li><a class="badge" href={d.repo} target="_blank" rel="noopener">GitHub</a></li>}
     {d.package && <li><a class="badge" href={d.package} target="_blank" rel="noopener">PyPI</a></li>}
     {paper && <li><a class="badge" href={`/publications/#${paper.id}`}>Paper</a></li>}
   </ul>

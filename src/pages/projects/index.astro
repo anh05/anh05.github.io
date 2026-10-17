@@ -2,24 +2,26 @@
 /* Author: DA Nguyen */
 // Open-source projects.
 import { getCollection } from 'astro:content';
-import ProjectCard from '../components/ProjectCard.astro';
-import { profile } from '../data/profile';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { profile } from '../../data/profile';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout
   title="Projects"
-  description={`Open-source Python packages and research code by ${profile.name}: AutoML, Bayesian optimization and imbalanced classification.`}
+  description={`Projects by ${profile.name}: the MycoBase website, the xAutoML platform, and open-source Python packages for AutoML and Bayesian optimization.`}
 >
   <div class="container page">
     <header class="page-header">
       <h1>Projects</h1>
       <p class="lead muted" style="max-width: var(--measure)">
-        Open-source Python packages on <a href={profile.links.pypi.url} target="_blank" rel="noopener">PyPI</a> and
-        research code on <a href={profile.links.github.url} target="_blank" rel="noopener">GitHub</a>, each linked
-        to the paper it implements.
+        Open research data infrastructure, a self-initiated AutoML platform, and open-source Python packages on <a
+          href={profile.links.pypi.url}
+          target="_blank"
+          rel="noopener">PyPI</a
+        > with research code on <a href={profile.links.github.url} target="_blank" rel="noopener">GitHub</a>.
       </p>
     </header>
     <ul class="card-grid">

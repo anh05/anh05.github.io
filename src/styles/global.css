@@ -622,6 +622,12 @@ button.badge:hover {
   list-style: none;
 }
 
+@media (min-width: 48rem) {
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -640,6 +646,22 @@ button.badge:hover {
 .card-title {
   font-size: var(--text-lg);
   margin-bottom: var(--space-2);
+}
+
+.card-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-title-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.card .card-meta {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
 }
 
 .card p {
@@ -725,6 +747,17 @@ button.badge:hover {
 .entry-org {
   margin: var(--space-1) 0 0;
   font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.entry-org a {
+  color: var(--color-text);
+}
+
+.entry-subtitle {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   color: var(--color-muted);
 }
 

@@ -8,6 +8,7 @@ import photo from '../assets/photo.png';
 import ProfileLinks from '../components/ProfileLinks.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PublicationItem from '../components/PublicationItem.astro';
+import TalkList from '../components/TalkList.astro';
 import { profile } from '../data/profile';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -17,6 +18,8 @@ const projects = (await getCollection('projects', ({ data }) => data.featured)).
 const publications = (await getCollection('publications', ({ data }) => data.selected)).sort(
   (a, b) => b.data.year - a.data.year,
 );
+const talks = (await getCollection('talks')).sort((a, b) => b.data.year - a.data.year);
+const { currentRole } = profile;
 ---
 
 <BaseLayout type="profile">
@@ -28,6 +31,9 @@ const publications = (await getCollection('publications', ({ data }) => data.sel
         <p class="hero-headline">
           {profile.headline}
           <span>{profile.focus}</span>
+        </p>
+        <p class="hero-current">
+          Currently <strong>{currentRole.title}</strong> at {currentRole.organization}
         </p>
         <p class="hero-value">{profile.valueStatement}</p>
         <div class="hero-actions">
@@ -75,7 +81,7 @@ const publications = (await getCollection('publications', ({ data }) => data.sel
         <h2 id="projects-title">Selected projects</h2>
         <a class="more-link" href="/projects/">All projects <span aria-hidden="true">→</span></a>
       </div>
-      <ul class="card-grid">
+      <ul class="card-grid card-grid-2">
         {
           projects.map((project) => (
             <li>
@@ -95,6 +101,17 @@ const publications = (await getCollection('publications', ({ data }) => data.sel
         {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
       </div>
     </section>
+
+    {
+      talks.length > 0 && (
+        <section class="section" aria-labelledby="talks-title">
+          <div class="section-head">
+            <h2 id="talks-title">Talks</h2>
+          </div>
+          <TalkList talks={talks} />
+        </section>
+      )
+    }
   </div>
 </BaseLayout>
 
@@ -138,6 +155,17 @@ const publications = (await getCollection('publications', ({ data }) => data.sel
     font-size: var(--text-base);
     font-weight: 400;
     color: var(--color-muted);
+  }
+
+  .hero-current {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .hero-current strong {
+    font-weight: 600;
+    color: var(--color-text);
   }
 
   .hero-value {

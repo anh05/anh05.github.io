@@ -1,9 +1,11 @@
 ---
 /* Author: DA Nguyen */
-// Page shell: head metadata, header navigation and footer.
+// Page shell: head metadata, theme bootstrap, header navigation and footer.
+import '@fontsource-variable/source-serif-4/wght.css';
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
-import { fullHeadline, profile } from '../data/profile';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { fullHeadline, profile, profileLinks } from '../data/profile';
 import { getNav } from '../lib/site';
 
 interface Props {
@@ -25,6 +27,15 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply a saved theme before first paint to avoid a flash.
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121413" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
@@ -34,8 +45,8 @@ const year = new Date().getFullYear();
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="site-name" href="/">{profile.name}</a>
-        <nav aria-label="Main">
+        <a class="brand" href="/">{profile.name}</a>
+        <nav class="site-nav" aria-label="Main">
           <ul>
             {
               nav.map((item) => (
@@ -48,14 +59,26 @@ const year = new Date().getFullYear();
             }
           </ul>
         </nav>
+        <ThemeToggle />
       </div>
     </header>
-    <main id="main" class="container">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <footer class="site-footer">
-      <div class="container">
+      <div class="container footer-inner">
         <p>© {year} {profile.name} · {profile.location}</p>
+        <ul aria-label="Profiles">
+          {
+            profileLinks.map((link) => (
+              <li>
+                <a href={link.url} rel="me noopener" target="_blank">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </footer>
   </body>

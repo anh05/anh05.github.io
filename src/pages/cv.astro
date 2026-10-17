@@ -27,7 +27,7 @@ const talks = (await getCollection('talks')).sort((a, b) => b.data.year - a.data
         {profile.headline}
         <span>{profile.focus}</span>
       </p>
-      <p class="meta">{profile.location} · Citizenship: {profile.citizenship}</p>
+      <p class="meta">{profile.location}</p>
       <ProfileLinks handles />
       <div class="cv-actions no-print">
         {

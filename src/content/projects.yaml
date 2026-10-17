@@ -3,15 +3,6 @@
 # Links: `url` (public website), `caseStudy` (page on this site), `repo`, `package`.
 # `featured: true` shows it on the home page; `order` sorts ascending.
 
-- id: mycobase-website
-  name: MycoBase website
-  description: Project website for MycoBase, an NWO-funded open science infrastructure that brings fungal data together in one searchable, FAIR platform. Astro static site with Decap CMS so scientists can publish without Git, GitHub OAuth for editors, and CI/CD with GitHub Actions to a SURF Research Cloud VM (nginx, HTTPS).
-  role: Sole developer of the website
-  tags: [Astro, Decap CMS, GitHub Actions, SURF Research Cloud, nginx]
-  url: https://mycobase.org
-  featured: true
-  order: 1
-
 - id: xautoml
   name: xAutoML
   description: Self-initiated platform that guides non-experts from a raw dataset to a tuned, explainable ML model. Flask, MySQL/SQLAlchemy and an AutoML back end built on DACOpt/BO4ML, deployed with Docker Compose, GitHub Actions and Cloudflare Tunnel.
@@ -20,7 +11,7 @@
   tags: [Python, Flask, MySQL, Docker, GitHub Actions]
   caseStudy: /projects/xautoml/
   featured: true
-  order: 2
+  order: 1
 
 - id: dacopt
   name: DACOpt
@@ -30,7 +21,7 @@
   package: https://pypi.org/project/DACOpt/
   publication: nguyen2022access
   featured: true
-  order: 3
+  order: 2
 
 - id: bo4ml
   name: BO4ML
@@ -40,7 +31,7 @@
   package: https://pypi.org/project/BO4ML/
   publication: nguyen2021ssci
   featured: true
-  order: 4
+  order: 3
 
 - id: automl-multiclass-imbalanced
   name: AutoML for imbalanced multiclass data
@@ -48,4 +39,4 @@
   tags: [Python, AutoML, Imbalanced classification]
   repo: https://github.com/anh05/AutoML-Multiclass-Imbalanced
   publication: nguyen2024steel
-  order: 5
+  order: 4

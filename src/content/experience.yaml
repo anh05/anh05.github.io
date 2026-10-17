@@ -7,20 +7,20 @@
   organization: Westerdijk Fungal Biodiversity Institute (KNAW)
   location: Utrecht, The Netherlands
   start: "2026-10"
-  subtitle: Molecular Medical Mycology · MycoBase, NWO-funded open science infrastructure project
+  subtitle: Molecular Medical Mycology · MycoBase, an NWO-funded open online resource for mycology
   highlights:
-    - Building MycoBase, an open online resource that brings fungal data together (taxonomy, DNA barcodes, traits, literature) from the institute's collection and international databases (GenBank, MycoBank, UNITE, GBIF) into one searchable, FAIR platform.
-    - Designing the central database, API and platform architecture.
-    - "Built and launched the project website (https://mycobase.org): Astro static site, Decap CMS so scientists can publish without Git, GitHub OAuth for editors, CI/CD with GitHub Actions to a SURF Research Cloud VM (nginx, HTTPS)."
-    - Prepared the SURF e-infrastructure request for compute and hosting (sequence-analysis workflows and the online platform).
-  tags: [Python, Databases, Astro, GitHub Actions, SURF Research Cloud, nginx, FAIR data]
+    - "Software engineer responsible for the MycoBase platform: a central database, API and web portal linking fungal names, strains, DNA barcodes, traits and literature from the institute's collection and international sources (MycoBank, GenBank, UNITE, BOLD, GBIF)."
+    - Designed the central data model in PostgreSQL with two hubs, taxon and strain; multi-source import and matching so each name, strain and sequence is stored once with all its external identifiers.
+    - "Designed curation and FAIR publishing into the core: review workflow with field-level change history, editing rights per branch of the taxonomy, controlled vocabularies, and versioned datasets with DOIs mapped to Darwin Core and MIxS."
+    - Validated the model by importing the institute's species-description data and reporting issues back to curators.
+  tags: [PostgreSQL, Data modelling, Python, FAIR data, Darwin Core, SURF Research Cloud]
 
 - id: xautoml
   role: Independent software development
   organization: xAutoML
   link: /projects/xautoml/
-  location: Leiden, The Netherlands
-  start: "2024"
+  location: Netherlands
+  start: "2025"
   end: "2026-09"
   highlights:
     - Self-initiated platform that guides non-experts from a raw dataset to a tuned, explainable ML model.

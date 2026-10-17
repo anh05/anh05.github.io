@@ -1,7 +1,7 @@
 /* Author: DA Nguyen */
 // Personal profile data. Edit this file to update the identity, summary,
-// links and skills shown across the site. Never add a phone number,
-// street address or referee details here: this file is published.
+// links and skills shown across the site. This file is published: never add
+// a phone number, home address or city, citizenship, or referee details.
 
 export interface ProfileLink {
   label: string;
@@ -12,7 +12,7 @@ export interface ProfileLink {
 
 /** Short professional summary (Home, CV profile, meta description). */
 const summary =
-  'Software engineer building open research data infrastructure, currently at the Westerdijk Fungal Biodiversity Institute (KNAW). I bring 8+ years of designing and running ERP/BI data systems, from database architecture to web-based reporting platforms, and a PhD in AutoML from Leiden University with published open-source Python packages.';
+  'Software engineer building open research data infrastructure for mycology at the Westerdijk Fungal Biodiversity Institute (KNAW). Before that, 8+ years designing and running ERP/BI data systems, from database architecture to web-based reporting platforms, and a PhD in AutoML at Leiden University with published open-source Python packages.';
 
 export const profile = {
   name: 'Duc Anh Nguyen',
@@ -25,7 +25,6 @@ export const profile = {
   currentRole: {
     title: 'Software Engineer',
     organization: 'Westerdijk Fungal Biodiversity Institute (KNAW)',
-    location: 'Utrecht, The Netherlands',
   },
   summary,
   /** One-line value statement for the home page hero. */
@@ -48,7 +47,7 @@ export const profile = {
       linkLabel: 'Publications',
     },
     {
-      period: '2024–present',
+      period: 'Ongoing',
       title: 'Open research software',
       text: 'Open-source Python packages (DACOpt, BO4ML), the xAutoML platform, and open science data infrastructure.',
       href: '/projects/',
@@ -59,8 +58,8 @@ export const profile = {
     summary,
     'Experienced in international, multidisciplinary teams (Honda, NEC, Tata Steel). Keen interest in Open Science, FAIR data principles, research data infrastructure, and applying ML/LLMs to make scientific data more discoverable and reusable.',
   ],
-  location: 'Leiden, The Netherlands',
-  citizenship: 'Dutch (EU) & Vietnamese',
+  /** Country only: never publish a city, street, postcode or citizenship. */
+  location: 'Netherlands',
   /** Split so the full address never appears verbatim in the HTML source. */
   email: { user: 'anh.LEIDEN', domain: 'gmail.com' },
   links: {

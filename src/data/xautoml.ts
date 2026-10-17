@@ -14,7 +14,7 @@ export const xautoml = {
   tagline: 'A self-initiated platform that guides non-experts from a raw dataset to a tuned, explainable ML model.',
   appUrl: 'https://app.xautoml.nl',
   role: 'Sole developer',
-  period: '2024 – Sep 2026',
+  period: '2025 – Sep 2026',
   status: 'In active development — not yet open for public registration.',
   problem: [
     'Turning a raw dataset into a good machine-learning model usually takes an expert: choosing algorithms, tuning their hyperparameters and judging whether the result can be trusted.',

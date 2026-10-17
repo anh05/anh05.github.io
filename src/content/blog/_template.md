@@ -1,5 +1,4 @@
 ---
-# Author: DA Nguyen
 # Template for a new post. Copy this file to e.g. my-first-post.md (no leading
 # underscore); the file name becomes the URL: /blog/my-first-post/.
 # The Blog link appears in the navigation once a post with draft: false exists.

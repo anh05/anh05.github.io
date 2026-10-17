@@ -1,4 +1,3 @@
-/* Author: DA Nguyen */
 // Builds a BibTeX entry from a publication's data.
 import type { CollectionEntry } from 'astro:content';
 

@@ -1,4 +1,3 @@
-/* Author: DA Nguyen */
 // Content for the xAutoML case study (/projects/xautoml/). Screenshots are
 // read from src/assets/xautoml/ (see the README there); set `video` to embed
 // a demo video.

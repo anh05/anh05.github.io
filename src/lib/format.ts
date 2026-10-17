@@ -1,4 +1,3 @@
-/* Author: DA Nguyen */
 // Small formatting and sorting helpers shared by pages.
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

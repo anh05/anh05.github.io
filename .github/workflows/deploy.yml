@@ -1,4 +1,3 @@
-# Author: DA Nguyen
 # Build the Astro site and deploy it to GitHub Pages.
 # Requires Settings → Pages → Source: "GitHub Actions".
 name: Deploy to GitHub Pages

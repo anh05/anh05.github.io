@@ -1,4 +1,3 @@
-# Author: DA Nguyen
 # Publications. `doi` is the bare DOI (no https://doi.org/ prefix).
 # `status: in-review` marks manuscripts under review. `selected: true` shows it on the home page.
 # BibTeX is generated from these fields (src/lib/bibtex.ts).

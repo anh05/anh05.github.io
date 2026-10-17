@@ -1,4 +1,3 @@
-/* Author: DA Nguyen */
 // Content collections. Each collection is a single YAML file in src/content/
 // (except the blog, which uses one Markdown file per post). The schemas below
 // validate every entry at build time.

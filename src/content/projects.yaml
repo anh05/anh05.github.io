@@ -1,4 +1,3 @@
-# Author: DA Nguyen
 # Projects. `publication` must match an `id` in publications.yaml.
 # Links: `url` (public website), `caseStudy` (page on this site), `repo`, `package`.
 # `featured: true` shows it on the home page; `order` sorts ascending.

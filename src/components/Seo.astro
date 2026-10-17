@@ -1,5 +1,4 @@
 ---
-/* Author: DA Nguyen */
 // Meta description, canonical URL, Open Graph, Twitter and JSON-LD Person schema.
 import { getImage } from 'astro:assets';
 import photo from '../assets/photo.png';
@@ -42,7 +41,7 @@ const person = {
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="author" content="DA Nguyen" />
+<meta name="author" content={profile.name} />
 <link rel="canonical" href={canonical} />
 
 <meta property="og:type" content={type} />

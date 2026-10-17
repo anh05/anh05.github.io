@@ -1,5 +1,4 @@
 ---
-/* Author: DA Nguyen */
 // Page shell: head metadata, theme bootstrap, header navigation and footer.
 import '@fontsource-variable/source-serif-4/wght.css';
 import '../styles/global.css';
@@ -67,7 +66,10 @@ const year = new Date().getFullYear();
     </main>
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© {year} {profile.name} · {profile.location}</p>
+        <div>
+          <p>© {year} {profile.name}</p>
+          <p class="footer-note">Built with Astro. Developed with AI-assisted coding tools.</p>
+        </div>
         <ul aria-label="Profiles">
           {
             profileLinks.map((link) => (

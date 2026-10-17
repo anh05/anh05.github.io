@@ -1,4 +1,3 @@
-/* Author: DA Nguyen */
 // Personal profile data. Edit this file to update the identity, summary,
 // links and skills shown across the site. This file is published: never add
 // a phone number, home address or city, citizenship, or referee details.
@@ -16,7 +15,7 @@ const summary =
 
 export const profile = {
   name: 'Duc Anh Nguyen',
-  /** Short form used for authorship metadata. */
+  /** Short form, used as the JSON-LD alternateName. */
   shortName: 'DA Nguyen',
   title: 'Dr.',
   headline: 'Software Engineer | Data Scientist',

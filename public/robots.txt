@@ -1,4 +1,3 @@
-# Author: DA Nguyen
 User-agent: *
 Allow: /
 

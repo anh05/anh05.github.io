@@ -1,6 +1,6 @@
 # anh05.github.io
 
-Author: DA Nguyen
+Author: Duc Anh Nguyen
 
 Personal website of Duc Anh Nguyen, built with [Astro](https://astro.build) and served at <https://anh05.github.io>.
 
@@ -40,6 +40,10 @@ Entries are validated against the schemas in `src/content.config.ts`, so `npm ru
 - The Talks sections on `/cv` and Home appear once `talks.yaml` has an entry.
 - A project with `caseStudy` links to that page instead of an external site.
 - Place a PDF at `public/cv.pdf` to show a "Download PDF" link on `/cv`. It must not contain a phone number, street address or referee details.
+
+## Credits
+
+Built with Astro. Developed with AI-assisted coding tools.
 
 ## Deploy
 

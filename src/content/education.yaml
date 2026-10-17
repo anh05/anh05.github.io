@@ -29,18 +29,3 @@
   start: "2014"
   end: "2014"
 
-- id: bsc-aut
-  degree: BSc, IT Service Science
-  institution: Auckland University of Technology, joint programme with University of Science, Vietnam National University
-  location: Ho Chi Minh City, Vietnam
-  start: "2010"
-  end: "2012"
-
-- id: diploma-niit
-  degree: Professional Diploma, Information Technology (Software Engineering)
-  institution: NIIT International Information Technology Institute
-  location: Vietnam
-  start: "2006"
-  end: "2009"
-  details:
-    - NIIT Bright Future scholarship.

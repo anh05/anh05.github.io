@@ -1,0 +1,110 @@
+# Author: DA Nguyen
+# Work experience, sorted most recent first (by `end`, then `start`); order here does not matter.
+# Dates: "YYYY" or "YYYY-MM". Omit `end` for a current position.
+
+- id: westerdijk-knaw
+  role: Software Engineer
+  organization: Westerdijk Institute (KNAW)
+  location: The Netherlands
+  start: "2026"
+  tags: [System/database design, Software engineering, Machine learning, Data science]
+
+- id: academic-industry-engagement
+  role: Academic & Industry Engagement
+  organization: HCMC University of Foreign Languages – Information Technology; University of Greenwich (Vietnam campus)
+  location: Vietnam
+  start: "2023"
+  highlights:
+    - On-call teaching support (HCMC University of Foreign Languages – Information Technology, 2025–present; University of Greenwich Vietnam campus, 2023–2024).
+    - Invited talks on AI applications in industry; maintained academic and professional collaboration networks.
+  tags: [Teaching, AI applications]
+
+- id: phd-liacs
+  role: PhD Researcher — Data Science & ML Engineering
+  organization: Leiden Institute of Advanced Computer Science (LIACS), Leiden University
+  location: Leiden, The Netherlands
+  start: "2018-10"
+  end: "2024"
+  note: Marie Skłodowska-Curie Early Stage Researcher, EU Horizon 2020 ECOLE project
+  highlights:
+    - Designed and implemented AutoML / hyperparameter-optimization systems in Python, applied to real industrial data with Honda, NEC and Tata Steel (defect detection, imbalanced classification, financial forecasting).
+    - Built and published open-source Python packages with documentation and reproducible experiments — DACOpt and BO4ML (PyPI + GitHub).
+    - Developed reusable data pipelines and experimentation frameworks for large-scale ML benchmarking.
+    - Teaching assistant, graduate course "Introduction to Machine Learning" (2021/2022).
+  tags: [Python, AutoML, Data pipelines, Optimization, Open source, Research]
+
+- id: tata-steel
+  role: Visiting Researcher
+  organization: Tata Steel Europe
+  location: IJmuiden, The Netherlands
+  start: "2021-04"
+  end: "2021-12"
+  highlights:
+    - Developed predictive models for steel surface defect detection, improving production quality and offering decision-support insights for manufacturing optimization.
+  tags: [Defect detection, Multi-class imbalanced, Unequal class importances]
+
+- id: honda-ri
+  role: Visiting Researcher
+  organization: Honda Research Institute Europe GmbH (HRI-EU)
+  location: Offenbach am Main, Germany
+  start: "2020-04"
+  end: "2021-03"
+  highlights:
+    - Researched and applied hyperparameter optimization and imbalanced classification techniques, improving model performance in real-world predictive analytics contexts.
+  tags: [Hyperparameter optimization, Imbalanced classification]
+
+- id: nec-labs
+  role: Visiting Researcher
+  organization: NEC Laboratories Europe GmbH (NEC-EU)
+  location: Heidelberg, Germany
+  start: "2019-08"
+  end: "2020-03"
+  highlights:
+    - Applied machine learning and statistical models to Japanese stock transaction data for predictive analytics, with insights relevant to financial forecasting and risk assessment.
+  tags: [Data analysis, Stock analysis]
+
+- id: nttu-industry40
+  role: Industry 4.0 Practitioner / Researcher
+  organization: Institute of Science and Technology of Industry 4.0, Nguyen Tat Thanh University
+  location: Ho Chi Minh City, Vietnam
+  start: "2017-07"
+  end: "2018-09"
+  highlights:
+    - Research on data mining, recommendation systems and ERP for the university.
+    - Smart-agriculture project combining IoT, sensor networks, machine learning, data mining and recommendation systems; responsible for system and database architecture.
+    - Contributed to the university's IT strategic plan for digital transformation, focusing on ERP and its subsystems.
+  tags: [Industry 4.0, Data mining, Database architecture]
+
+- id: boho-decor
+  role: Software Architect & Project Leader
+  organization: Boho Décor JSC (Coteccons subsidiary)
+  location: Ho Chi Minh City, Vietnam
+  start: "2017-02"
+  end: "2018-08"
+  note: Part-time
+  highlights:
+    - Managed development of the Financial Management System and the Sourcing Management System; project manager overseeing system and database architecture design.
+  tags: [MIS, ERP, BI, C#, MSSQL]
+
+- id: coteccons
+  role: Team Leader — Software Management & Development
+  organization: Coteccons Construction JSC
+  location: Ho Chi Minh City, Vietnam
+  start: "2015-10"
+  end: "2017-06"
+  highlights:
+    - Led the software R&D team designing, developing and consulting on ERP, BI and financial-management systems (C#, MSSQL, ASP.NET).
+    - Contributed to IT strategic planning.
+  tags: [C#, ASP.NET, MSSQL, BI, IT strategy]
+
+- id: poh-huat
+  role: ERP/BI Developer & Administrator
+  organization: Poh Huat Furniture Industries Vietnam JSC
+  location: Binh Duong, Vietnam
+  start: "2009-10"
+  end: "2015-10"
+  highlights:
+    - Researched and developed ERP and business-intelligence software.
+    - Built a web-based BI reporting platform with hundreds of report templates integrating data from many departments and the board of managers; later rolled out to branches in Malaysia and China.
+    - Led data-migration and integration projects consolidating heterogeneous data sources.
+  tags: [SQL Server, VB.NET, BI, ERP, Data migration]

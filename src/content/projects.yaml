@@ -1,0 +1,32 @@
+# Author: DA Nguyen
+# Open-source projects. `publication` must match an `id` in publications.yaml.
+# `featured: true` shows it on the home page; `order` sorts ascending.
+
+- id: dacopt
+  name: DACOpt
+  description: Open-source Python package implementing an efficient contesting procedure for AutoML optimization (combined algorithm selection and hyperparameter tuning), with documentation and reproducible experiments.
+  tags: [Python, AutoML, Hyperparameter optimization]
+  repo: https://github.com/ECOLE-ITN/NguyenIEEEAccess2022
+  package: https://pypi.org/project/DACOpt/
+  publication: nguyen2022access
+  featured: true
+  order: 1
+
+- id: bo4ml
+  name: BO4ML
+  description: Open-source Python package for Bayesian optimization of machine-learning pipelines, implementing efficient AutoML via combinational sampling, with reproducible experiments.
+  tags: [Python, Bayesian optimization, AutoML]
+  repo: https://github.com/ECOLE-ITN/NguyenSSCI2021
+  package: https://pypi.org/project/BO4ML/
+  publication: nguyen2021ssci
+  featured: true
+  order: 2
+
+- id: automl-multiclass-imbalanced
+  name: AutoML for imbalanced multiclass data
+  description: Code and experiments for efficient AutoML optimization on imbalanced multiclass data, with a case study on surface defect classification in steel manufacturing.
+  tags: [Python, AutoML, Imbalanced classification]
+  repo: https://github.com/anh05/AutoML-Multiclass-Imbalanced
+  publication: nguyen2024steel
+  featured: true
+  order: 3

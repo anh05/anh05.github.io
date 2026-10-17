@@ -1,0 +1,109 @@
+# Author: DA Nguyen
+# Publications. `doi` is the bare DOI (no https://doi.org/ prefix).
+# `status: in-review` marks manuscripts under review. `selected: true` shows it on the home page.
+# BibTeX is generated from these fields (src/lib/bibtex.ts).
+
+- id: nguyen2024thesis
+  type: thesis
+  title: Efficient Tuning of Automated Machine Learning Pipelines
+  authors: ["Nguyen, D. A."]
+  year: 2024
+  venue: Leiden University
+  selected: true
+
+- id: nguyen2024steel
+  type: conference
+  title: "Efficient AutoML Optimization for Imbalanced Multiclass Data: A Case Study on Surface Defect Classification in Steel Manufacturing"
+  authors: ["Nguyen, D. A.", "Kononova, A. V.", "Kong, J.", "Jonker, K.", "Pipard, N.", "Mooi, J.", "Bäck, T. H. W."]
+  year: 2024
+  venue: Manuscript
+  status: in-review
+  code: https://github.com/anh05/AutoML-Multiclass-Imbalanced
+
+- id: nguyen2023unequal
+  type: journal
+  title: Incorporating unequal class importances into CASH optimization for imbalanced multiclass classification
+  authors: ["Nguyen, D. A.", "Kononova, A. V.", "Kong, J.", "Jonker, K.", "Pipard, N.", "Mooi, J.", "Bäck, T. H. W."]
+  year: 2023
+  venue: Manuscript
+  status: in-review
+
+# Source CV printed the DOI as "0.1109/..."; corrected.
+- id: nguyen2022access
+  type: journal
+  title: An Efficient Contesting Procedure for AutoML Optimization
+  authors: ["Nguyen, D. A.", "Kononova, A. V.", "Menzel, S.", "Sendhoff, B.", "Bäck, T. H. W."]
+  year: 2022
+  venue: IEEE Access
+  volume: "10"
+  pages: 75754–75771
+  publisher: IEEE
+  doi: 10.1109/ACCESS.2022.3192036
+  code: https://github.com/ECOLE-ITN/NguyenIEEEAccess2022
+  package: https://pypi.org/project/DACOpt/
+  selected: true
+
+- id: nguyen2021ssci
+  type: conference
+  title: Efficient AutoML via combinational sampling
+  authors: ["Nguyen, D. A.", "Kononova, A. V.", "Menzel, S.", "Sendhoff, B.", "Bäck, T. H. W."]
+  year: 2021
+  venue: IEEE Symposium Series on Computational Intelligence (SSCI)
+  pages: 1–10
+  publisher: IEEE
+  doi: 10.1109/SSCI50451.2021.9660073
+  code: https://github.com/ECOLE-ITN/NguyenSSCI2021
+  package: https://pypi.org/project/BO4ML/
+  selected: true
+
+- id: nguyen2021dsaa
+  type: conference
+  title: Improved automated CASH optimization with tree parzen estimators for class imbalance problems
+  authors: ["Nguyen, D. A.", "Kong, J.", "Wang, H.", "Menzel, S.", "Sendhoff, B.", "Kononova, A. V.", "Bäck, T. H. W."]
+  year: 2021
+  venue: IEEE 8th International Conference on Data Science and Advanced Analytics (DSAA)
+  pages: 1–9
+  publisher: IEEE
+  doi: 10.1109/DSAA53316.2021.9564147
+  code: https://github.com/ECOLE-ITN/NguyenDSAA2021
+  selected: true
+
+- id: ullah2020ssci
+  type: conference
+  title: Exploring dimensionality reduction techniques for efficient surrogate-assisted optimization
+  authors: ["Ullah, S.", "Nguyen, D. A.", "Wang, H.", "Menzel, S.", "Sendhoff, B.", "Bäck, T. H. W."]
+  year: 2020
+  venue: IEEE Symposium Series on Computational Intelligence (SSCI)
+  pages: 2965–2974
+  publisher: IEEE
+  doi: 10.1109/SSCI47803.2020.9308465
+
+- id: kong2019ssci
+  type: conference
+  title: Hyperparameter optimisation for improving classification under class imbalance
+  authors: ["Kong, J.", "Kowalczyk, W. J.", "Nguyen, D. A.", "Bäck, T. H. W.", "Menzel, S."]
+  year: 2019
+  venue: IEEE Symposium Series on Computational Intelligence (SSCI)
+  pages: 3072–3078
+  publisher: IEEE
+  doi: 10.1109/SSCI44817.2019.9002679
+
+- id: duong2017jifs
+  type: journal
+  title: Behavior-based video recommendation using adaptive neuro-fuzzy system on social TV
+  authors: ["Duong, T. H.", "Nguyen, D. A.", "Nguyen, V. D.", "Nguyen, V. H."]
+  year: 2017
+  venue: Journal of Intelligent and Fuzzy Systems
+  volume: "32"
+  pages: 1627–1638
+  doi: 10.3233/JIFS-169155
+
+- id: nguyen2015acmke
+  type: conference
+  title: Video Recommendation Using NeuroFuzzy on Social TV Environment
+  authors: ["Nguyen, D. A.", "Duong, T. H."]
+  year: 2015
+  venue: Advanced Computational Methods for Knowledge Engineering
+  pages: 291–298
+  publisher: Springer
+  doi: 10.1007/978-3-319-17996-4_26

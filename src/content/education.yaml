@@ -1,0 +1,46 @@
+# Author: DA Nguyen
+# Education, sorted most recent first (by `end`, then `start`).
+
+- id: phd-leiden
+  degree: PhD, Data Science
+  institution: Leiden University
+  location: Leiden, The Netherlands
+  start: "2018"
+  end: "2024"
+  thesis: Efficient tuning of automated machine learning pipelines
+  details:
+    - Fully funded through the ECOLE project — EU Marie Skłodowska-Curie Actions (grant 766186).
+
+- id: msc-hcmiu
+  degree: MSc, Information Technology Management
+  institution: International University, Vietnam National University
+  location: Ho Chi Minh City, Vietnam
+  start: "2012"
+  end: "2015"
+  thesis: Adaptive Neuro-Fuzzy Network for Recommendation
+  details:
+    - Partial scholarship for outstanding performance on the master's entry exam.
+    - Selected to represent the School of Computer Science & Engineering in the 2014 student-exchange programme.
+
+- id: exchange-munich
+  degree: MSc, Computer Science (student exchange, 6 months)
+  institution: Hochschule München (Munich University of Applied Sciences)
+  location: Munich, Germany
+  start: "2014"
+  end: "2014"
+
+- id: bsc-aut
+  degree: BSc, IT Service Science
+  institution: Auckland University of Technology, joint programme with University of Science, Vietnam National University
+  location: Ho Chi Minh City, Vietnam
+  start: "2010"
+  end: "2012"
+
+- id: diploma-niit
+  degree: Professional Diploma, Information Technology (Software Engineering)
+  institution: NIIT International Information Technology Institute
+  location: Vietnam
+  start: "2006"
+  end: "2009"
+  details:
+    - NIIT Bright Future scholarship.

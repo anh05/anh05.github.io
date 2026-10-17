@@ -1,6 +1,7 @@
 ---
 /* Author: DA Nguyen */
-// Web version of the CV. References are never listed: "available on request".
+// Web version of the CV, also styled for A4 print (see @media print in
+// global.css). References are never listed: "available on request".
 import { getCollection } from 'astro:content';
 import ProfileLinks from '../components/ProfileLinks.astro';
 import PublicationItem from '../components/PublicationItem.astro';
@@ -16,137 +17,261 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
 ---
 
 <BaseLayout title="CV" description={`Curriculum vitae of ${profile.name}, ${fullHeadline}.`} type="profile">
-  <header>
-    <h1>{profile.title} {profile.name}</h1>
-    <p class="headline">{profile.headline}</p>
-    <p class="focus">{profile.focus}</p>
-    <p class="muted">{profile.location} · Citizenship: {profile.citizenship}</p>
-    <ProfileLinks />
-    {
-      hasCvPdf && (
-        <p class="more">
-          <a href="/cv.pdf" download>
-            Download PDF
-          </a>
-        </p>
-      )
-    }
-  </header>
+  <div class="container narrow page cv">
+    <header class="cv-header">
+      <h1>{profile.title} {profile.name}</h1>
+      <p class="cv-headline">
+        {profile.headline}
+        <span>{profile.focus}</span>
+      </p>
+      <p class="meta">{profile.location} · Citizenship: {profile.citizenship}</p>
+      <ProfileLinks handles />
+      <div class="cv-actions no-print">
+        {
+          hasCvPdf && (
+            <a class="button" href="/cv.pdf" download>
+              Download PDF
+            </a>
+          )
+        }
+        <button class="button button-ghost js-only" type="button" data-print>Print</button>
+      </div>
+    </header>
 
-  <section aria-labelledby="profile">
-    <h2 id="profile">Profile</h2>
-    {profile.about.map((paragraph) => <p>{paragraph}</p>)}
-  </section>
+    <section class="cv-section" aria-labelledby="profile">
+      <h2 id="profile">Profile</h2>
+      <div class="prose">
+        {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
 
-  <section aria-labelledby="skills">
-    <h2 id="skills">Technical skills</h2>
-    <dl class="skills">
+    <section class="cv-section" aria-labelledby="experience">
+      <h2 id="experience">Experience</h2>
       {
-        profile.skills.map((skill) => (
-          <>
-            <dt>{skill.area}</dt>
-            <dd>{skill.items}</dd>
-          </>
+        experience.map(({ data }) => (
+          <article class="entry">
+            <p class="entry-when">{formatRange(data.start, data.end)}</p>
+            <div class="entry-body">
+              <h3>{data.role}</h3>
+              <p class="entry-org">
+                {data.organization} · {data.location}
+                {data.note && ` · ${data.note}`}
+              </p>
+              {data.highlights.length > 0 && (
+                <ul>
+                  {data.highlights.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+              {data.tags.length > 0 && (
+                <ul class="tags" aria-label="Skills">
+                  {data.tags.map((tag) => (
+                    <li>{tag}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </article>
         ))
       }
-    </dl>
-  </section>
+    </section>
 
-  <section aria-labelledby="experience">
-    <h2 id="experience">Experience</h2>
-    {
-      experience.map(({ data }) => (
-        <article class="entry">
-          <h3>
-            {data.role}, {data.organization}
-          </h3>
-          <p class="entry-meta">
-            {formatRange(data.start, data.end)} · {data.location}
-            {data.note && ` · ${data.note}`}
-          </p>
-          {data.highlights.length > 0 && (
-            <ul>
-              {data.highlights.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          )}
-          {data.tags.length > 0 && (
-            <ul class="tags">
-              {data.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
-          )}
-        </article>
-      ))
-    }
-  </section>
+    <section class="cv-section" aria-labelledby="skills">
+      <h2 id="skills">Technical skills</h2>
+      <dl class="skills">
+        {
+          profile.skills.map((skill) => (
+            <>
+              <dt>{skill.area}</dt>
+              <dd>{skill.items}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </section>
 
-  <section aria-labelledby="education">
-    <h2 id="education">Education</h2>
-    {
-      education.map(({ data }) => (
-        <article class="entry">
-          <h3>{data.degree}</h3>
-          <p class="entry-meta">
-            {data.institution} · {data.location} · {formatRange(data.start, data.end)}
-          </p>
-          {(data.thesis || data.details.length > 0) && (
-            <ul>
-              {data.thesis && (
-                <li>
-                  Thesis: <em>{data.thesis}</em>
-                </li>
+    <section class="cv-section" aria-labelledby="education">
+      <h2 id="education">Education</h2>
+      {
+        education.map(({ data }) => (
+          <article class="entry">
+            <p class="entry-when">{formatRange(data.start, data.end)}</p>
+            <div class="entry-body">
+              <h3>{data.degree}</h3>
+              <p class="entry-org">
+                {data.institution} · {data.location}
+              </p>
+              {(data.thesis || data.details.length > 0) && (
+                <ul>
+                  {data.thesis && (
+                    <li>
+                      Thesis: <em>{data.thesis}</em>
+                    </li>
+                  )}
+                  {data.details.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
               )}
-              {data.details.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          )}
-        </article>
-      ))
-    }
-  </section>
+            </div>
+          </article>
+        ))
+      }
+    </section>
 
-  <section aria-labelledby="teaching">
-    <h2 id="teaching">Teaching</h2>
-    {
-      teaching.map(({ data }) => (
-        <article class="entry">
-          <h3>
-            {data.role}
-            {data.course && `, ${data.course}`}
-          </h3>
-          <p class="entry-meta">
-            {data.institution} · {data.location} · {formatRange(data.start, data.end)}
-          </p>
-          {data.details.length > 0 && (
-            <ul>
-              {data.details.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          )}
-        </article>
-      ))
-    }
-  </section>
+    <section class="cv-section" aria-labelledby="teaching">
+      <h2 id="teaching">Teaching</h2>
+      {
+        teaching.map(({ data }) => (
+          <article class="entry">
+            <p class="entry-when">{formatRange(data.start, data.end)}</p>
+            <div class="entry-body">
+              <h3>
+                {data.role}
+                {data.course && `, ${data.course}`}
+              </h3>
+              <p class="entry-org">
+                {data.institution} · {data.location}
+              </p>
+              {data.details.length > 0 && (
+                <ul>
+                  {data.details.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </section>
 
-  <section aria-labelledby="publications">
-    <h2 id="publications">Publications</h2>
-    {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
-    <p class="more"><a href="/publications/">Publications with BibTeX →</a></p>
-  </section>
+    <section class="cv-section" aria-labelledby="publications">
+      <h2 id="publications">Publications</h2>
+      <div class="pub-list">
+        {publications.map((pub) => <PublicationItem pub={pub} bibtex={false} />)}
+      </div>
+      <p class="no-print cv-more">
+        <a class="more-link" href="/publications/">Filter publications and copy BibTeX <span aria-hidden="true">→</span></a>
+      </p>
+    </section>
 
-  <section aria-labelledby="languages">
-    <h2 id="languages">Languages & strengths</h2>
-    <p>{profile.languages.map((lang) => `${lang.name} (${lang.level})`).join(' · ')}</p>
-    <p>{profile.strengths.join(' · ')}</p>
-  </section>
+    <section class="cv-section" aria-labelledby="languages">
+      <h2 id="languages">Languages & strengths</h2>
+      <dl class="skills">
+        <dt>Languages</dt>
+        <dd>{profile.languages.map((lang) => `${lang.name} (${lang.level})`).join(' · ')}</dd>
+        <dt>Strengths</dt>
+        <dd>{profile.strengths.join(' · ')}</dd>
+      </dl>
+    </section>
 
-  <section aria-labelledby="references">
-    <h2 id="references">References</h2>
-    <p>References available on request.</p>
-  </section>
+    <section class="cv-section" aria-labelledby="references">
+      <h2 id="references">References</h2>
+      <p>References available on request.</p>
+    </section>
+  </div>
 </BaseLayout>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-print]')) {
+    button.addEventListener('click', () => window.print());
+  }
+</script>
+
+<style>
+  .cv-header {
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cv-header h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .cv-headline {
+    margin: var(--space-2) 0 var(--space-3);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-text-strong);
+  }
+
+  .cv-headline span {
+    display: block;
+    font-size: var(--text-base);
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .cv-header :global(.link-row) {
+    margin-top: var(--space-4);
+  }
+
+  .cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .cv-section {
+    margin-top: var(--space-8);
+  }
+
+  .cv-section > h2 {
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cv-more {
+    margin-top: var(--space-5);
+  }
+
+  @media print {
+    .cv-header {
+      padding-bottom: 0.6rem;
+    }
+
+    .cv-header h1 {
+      font-size: 20pt;
+    }
+
+    .cv-headline {
+      font-size: 11pt;
+    }
+
+    .cv-section {
+      margin-top: 1.1rem;
+    }
+
+    .cv-section > h2 {
+      font-size: 12.5pt;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.2rem;
+    }
+
+    .prose p {
+      font-size: 10pt;
+      margin-bottom: 0.4rem;
+    }
+
+    .entry h3 {
+      font-size: 10.5pt;
+    }
+
+    .entry-body ul:not(.tags) {
+      font-size: 9.5pt;
+      margin-top: 0.25rem;
+    }
+
+    .tags {
+      margin-top: 0.25rem;
+    }
+
+    .pub-title {
+      font-size: 10pt;
+    }
+  }
+</style>

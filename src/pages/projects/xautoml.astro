@@ -1,0 +1,226 @@
+---
+/* Author: DA Nguyen */
+// xAutoML case study. Copy lives in src/data/xautoml.ts. Screenshots are read
+// from src/assets/xautoml/ (sorted by file name); the gallery renders nothing
+// while that folder has no images.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import XautomlArchitecture from '../../components/XautomlArchitecture.astro';
+import { profile } from '../../data/profile';
+import { xautoml } from '../../data/xautoml';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../../assets/xautoml/*.{png,jpg,jpeg,webp,avif}', {
+  eager: true,
+});
+
+/** "02-model-results.png" -> "Model results". */
+const caption = (path: string) => {
+  const name = path
+    .split('/')
+    .pop()!
+    .replace(/\.[^.]+$/, '')
+    .replace(/^\d+[-_ ]*/, '')
+    .replace(/[-_]+/g, ' ')
+    .trim();
+  return name.charAt(0).toUpperCase() + name.slice(1);
+};
+
+const screenshots = Object.entries(files)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([path, mod]) => ({ src: mod.default, caption: caption(path) }));
+const { video } = xautoml;
+---
+
+<BaseLayout
+  title="xAutoML — case study"
+  description={`${xautoml.name}: ${xautoml.tagline} Case study by ${profile.name}.`}
+  type="article"
+>
+  <article class="container narrow page case-study">
+    <header class="page-header">
+      <p class="eyebrow"><a href="/projects/">Projects</a> / Case study</p>
+      <h1>{xautoml.name}</h1>
+      <p class="lead">{xautoml.tagline}</p>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>{xautoml.role}</dd></div>
+        <div><dt>Period</dt><dd>{xautoml.period}</dd></div>
+        <div><dt>Status</dt><dd>{xautoml.status}</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="button" href={xautoml.appUrl} target="_blank" rel="noopener">
+          Visit app.xautoml.nl <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="cs-section" aria-labelledby="problem">
+      <h2 id="problem">The problem</h2>
+      <div class="prose">{xautoml.problem.map((p) => <p>{p}</p>)}</div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="audience">
+      <h2 id="audience">Who it is for</h2>
+      <div class="prose"><p>{xautoml.audience}</p></div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="architecture">
+      <h2 id="architecture">Architecture</h2>
+      <XautomlArchitecture />
+      <ul class="cs-list">{xautoml.architecture.map((item) => <li>{item}</li>)}</ul>
+    </section>
+
+    <section class="cs-section" aria-labelledby="stack">
+      <h2 id="stack">Tech stack</h2>
+      <ul class="tags" aria-label="Technologies">{xautoml.stack.map((tech) => <li>{tech}</li>)}</ul>
+    </section>
+
+    <section class="cs-section" aria-labelledby="role">
+      <h2 id="role">My role</h2>
+      <div class="prose"><p>{xautoml.myRole}</p></div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="status">
+      <h2 id="status">Current status</h2>
+      <div class="prose">
+        <p>
+          {xautoml.status} The app is online at <a href={xautoml.appUrl} target="_blank" rel="noopener"
+            >app.xautoml.nl</a
+          >.
+        </p>
+      </div>
+    </section>
+
+    {
+      screenshots.length > 0 && (
+        <section class="cs-section" aria-labelledby="screenshots">
+          <h2 id="screenshots">Screenshots</h2>
+          <div class="gallery">
+            {screenshots.map((shot) => (
+              <figure>
+                <a href={shot.src.src} target="_blank" rel="noopener">
+                  <Image src={shot.src} alt={shot.caption} widths={[720, 1440]} sizes="(min-width: 48rem) 44rem, 100vw" />
+                </a>
+                <figcaption>{shot.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      video && (
+        <section class="cs-section" aria-labelledby="video">
+          <h2 id="video">Demo</h2>
+          <div class="video">
+            <iframe
+              src={video.embedUrl}
+              title={video.title}
+              loading="lazy"
+              allow="encrypted-media; picture-in-picture; fullscreen"
+              referrerpolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .eyebrow a {
+    color: inherit;
+  }
+
+  .case-study h1 {
+    margin-top: var(--space-3);
+    font-size: var(--text-display);
+  }
+
+  .case-study .lead {
+    margin-top: var(--space-4);
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--space-3);
+    margin: var(--space-6) 0 0;
+    padding: var(--space-4) 0;
+    border-block: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 40rem) {
+    .facts {
+      grid-template-columns: auto auto 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  .facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  .facts dd {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-sm);
+  }
+
+  .actions {
+    margin-top: var(--space-6);
+  }
+
+  .cs-section {
+    margin-top: var(--space-8);
+  }
+
+  .cs-section > h2 {
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cs-list {
+    margin: var(--space-6) 0 0;
+  }
+
+  .cs-list li + li {
+    margin-top: var(--space-2);
+  }
+
+  .gallery {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .gallery figure {
+    margin: 0;
+  }
+
+  .gallery img {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .gallery figcaption {
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: var(--radius);
+  }
+</style>
